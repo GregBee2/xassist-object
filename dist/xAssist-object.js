@@ -1,6 +1,6 @@
-// https://github.com/GregBee2/xassist-object#readme Version 0.0.9.
+// https://github.com/GregBee2/xassist-object#readme Version 0.0.10.
 // Copyright 2018 undefined.
-// Created on Thu, 08 Mar 2018 20:12:37 GMT.
+// Created on Thu, 08 Mar 2018 20:13:42 GMT.
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
