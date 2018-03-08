@@ -1,14 +1,14 @@
 {
   "name": "@xassist/xassist-object",
-  "version": "0.0.10",
+  "version": "0.0.9",
   "description": "general helper functions for JavaScript objects ",
   "keywords": [
     "xAssist",
     "object",
     "array-functionality",
-    "assign",
-    "forEach",
-    "map"
+	"assign",
+	"forEach",
+	"map"
   ],
   "bugs": {
     "email": "gregory.beirens@gmail.com"
@@ -20,7 +20,7 @@
     "pretest": "rimraf dist  && rollup -c",
     "test": "istanbul cover node_modules/tape/bin/tape test/**/*-test.js",
     "build": "npm run test && git commit -am ",
-    "prepublishOnly": "npm version patch && npm run build  -- \"publish version %npm_package_version%\"",
+    "prepublishOnly": "npm version patch && npm run build  -- \"publish version latest version",
     "postpublish": "git push && git push --tags"
   },
   "files": [
