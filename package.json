@@ -17,7 +17,7 @@
     "pretest": "rimraf dist  && rollup -c",
     "test": "istanbul cover node_modules/tape/bin/tape test/**/*-test.js",
     "build": "npm run test && git add . && git commit -m \"build commit %npm_package_version%\"",
-	"a":"git commit -m \"build commit %npm_package_version%\"
+	"ab":"git commit -m \"build commit %npm_package_version%\"
     "prepublishOnly": "npm version patch && npm run build",
     "postpublish": "git push && git push --tags"
   },
