@@ -1,6 +1,6 @@
 {
   "name": "@xassist/xassist-object",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "general helper functions for JavaScript objects ",
   "keywords": [
     "xAssist",
