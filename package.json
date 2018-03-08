@@ -5,7 +5,10 @@
   "keywords": [
     "xAssist",
     "object",
-    "arra-functionality"
+    "array-functionality",
+	"assign",
+	"forEach",
+	"map"
   ],
   "bugs": {
     "email": "gregory.beirens@gmail.com"
