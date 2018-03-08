@@ -1,14 +1,14 @@
 {
   "name": "@xassist/xassist-object",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "general helper functions for JavaScript objects ",
   "keywords": [
     "xAssist",
     "object",
     "array-functionality",
-	"assign",
-	"forEach",
-	"map"
+    "assign",
+    "forEach",
+    "map"
   ],
   "bugs": {
     "email": "gregory.beirens@gmail.com"
