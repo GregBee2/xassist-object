@@ -23,13 +23,6 @@ npm test
 ```
 ```
 
-> @xassist/xassist-object@0.0.12 pretest C:\Applic\Server\DBNode-4.0.0-beta-3\htdocs\__Projects\utilities\submodules\xassist-object
-> rimraf dist  && rollup -c
-[ 'C:\\Windows\\SBOINSTALL\\NodeJS\\node.exe',
-  'C:\\Applic\\Server\\DBNode-4.0.0-beta-3\\htdocs\\__Projects\\utilities\\submodules\\xassist-object\\node_modules\\rollup\\bin\\rollup',
-  '-c' ]
-umd
-> @xassist/xassist-object@0.0.12 test C:\Applic\Server\DBNode-4.0.0-beta-3\htdocs\__Projects\utilities\submodules\xassist-object
 > istanbul cover node_modules/tape/bin/tape test/**/*-test.js
 TAP version 13
 # toArray() returns array with all objectKey-Values
