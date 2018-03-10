@@ -9,6 +9,23 @@ var testObject={
 }
 var t=object(testObject);
 
+tape("onChange(key,fn,thisArg) executes the function when the value for the key is set",function(test){
+	var res=false;
+	var fn=function(value,oldValue,key,Object){ res=Array.prototype.slice.call(arguments)};
+	//t.onChange("keyDoesNotExists",fn);
+	var err=false;
+	try{
+		t.onChange("keyDoesNotExists",fn);
+		
+	}catch(error){
+		err=error;
+	}
+	test.ok(!!err&&err.constructor.name==="ReferenceError"&&err.message==='key does not exist in Object',
+		"onChange() gives an error when key does not exist"
+	);
+	test.end();
+});
+
 
 tape("toArray() returns array with all objectKey-Values", function(test) {
 	var a=t.toArray();

@@ -30,7 +30,7 @@ export default function(obj){
 			set:function(value){
 				var oldValue=currentValue;
 				currentValue=value;
-				fn.call(thisArg, value, currentValue,key, obj); 
+				fn.call(thisArg, value, oldValue,key, obj); 
 			},
 			get:function(){
 				return currentValue;
@@ -106,6 +106,7 @@ export default function(obj){
 		toMapArray:toMapArray,
 		forEach:forEach,
 		map:map,
-		assign:assign
+		assign:assign,
+		onChange:onChange
 	}
 }

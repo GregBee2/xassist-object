@@ -1,6 +1,6 @@
 // https://github.com/GregBee2/xassist-object#readme Version 0.0.18.
 // Copyright 2018 undefined.
-// Created on Sat, 10 Mar 2018 18:34:31 GMT.
+// Created on Sat, 10 Mar 2018 18:54:12 GMT.
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -21,7 +21,27 @@ function object(obj){
 			return String(value);
 		}
 		return value;
-	}	function assign(varArgs) { // .length of function is 2
+	}	function onChange(key,fn,thisArg){
+		var currentValue;
+		if(!key || !obj.hasOwnProperty(key)){
+			throw new ReferenceError('key does not exist in Object');
+		}
+		if(!thisArg){
+			thisArg=obj;
+		}
+		currentValue=obj[key];
+		Object.defineProperty(obj,key,{
+			set:function(value){
+				var oldValue=currentValue;
+				currentValue=value;
+				fn.call(thisArg, value, oldValue,key, obj); 
+			},
+			get:function(){
+				return currentValue;
+			}
+		});
+	}
+	function assign(varArgs) { // .length of function is 2
 		if(typeof Object.assign === 'function'){
 			return Object.assign.apply(null,[obj].concat(Array.prototype.slice.call(arguments)));
 		}
@@ -90,7 +110,8 @@ function object(obj){
 		toMapArray:toMapArray,
 		forEach:forEach,
 		map:map,
-		assign:assign
+		assign:assign,
+		onChange:onChange
 	}
 }
 
