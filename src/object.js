@@ -2,6 +2,7 @@
 'use strict'
 
 export default function(obj){
+	var eventHelper={};
 	function _getType(value){
 		return typeof value;
 	};
@@ -18,25 +19,36 @@ export default function(obj){
 		return value;
 	};
 	function onChange(key,fn,thisArg){
-		var currentValue;
+		var currentValue, newWatch=false;;
 		if(!key || !obj.hasOwnProperty(key)){
 			throw new ReferenceError('key does not exist in Object');
 		}
-		if(!thisArg){
-			thisArg=obj;
+		if(!eventHelper.hasOwnProperty(key)){
+			eventHelper[key]={
+				currentValue:obj[key],
+				callback:[],
+				thisArg:[]
+			};
+			newWatch=true;
 		}
-		currentValue=obj[key];
-		Object.defineProperty(obj,key,{
-			set:function(value){
-				var oldValue=currentValue;
-				currentValue=value;
-				fn.call(thisArg, value, oldValue,key, obj); 
-			},
-			get:function(){
-				return currentValue;
-			}
-		});
-	}
+		eventHelper[key].callback.push(fn);
+		eventHelper[key].thisArg.push(thisArg);
+		if (newWatch){
+			Object.defineProperty(obj,key,{
+				set:function(value){
+					var oldValue=eventHelper[key].currentValue;
+					eventHelper[key].currentValue=value;
+					for (var i=0,len=eventHelper[key].callback.length;i<len;i++){
+						eventHelper[key].callback[i].call(eventHelper[key].thisArg[i]||obj, value, oldValue,key, obj); 
+					}
+					
+				},
+				get:function(){
+					return eventHelper[key].currentValue;
+				}
+			})
+		}
+	};
 	function assign(varArgs) { // .length of function is 2
 		if(typeof Object.assign === 'function'){
 			return Object.assign.apply(null,[obj].concat(Array.prototype.slice.call(arguments)));
