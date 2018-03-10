@@ -38,10 +38,11 @@ export default function(obj){
 				set:function(value){
 					var oldValue=eventHelper[key].currentValue;
 					eventHelper[key].currentValue=value;
-					for (var i=0,len=eventHelper[key].callback.length;i<len;i++){
-						eventHelper[key].callback[i].call(eventHelper[key].thisArg[i]||obj, value, oldValue,key, obj); 
+					if(value!==oldValue){
+						for (var i=0,len=eventHelper[key].callback.length;i<len;i++){
+							eventHelper[key].callback[i].call(eventHelper[key].thisArg[i]||obj, value, oldValue,key, obj); 
+						}
 					}
-					
 				},
 				get:function(){
 					return eventHelper[key].currentValue;

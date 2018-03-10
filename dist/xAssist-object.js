@@ -1,6 +1,6 @@
 // https://github.com/GregBee2/xassist-object#readme Version 0.0.18.
 // Copyright 2018 undefined.
-// Created on Sat, 10 Mar 2018 19:09:58 GMT.
+// Created on Sat, 10 Mar 2018 19:13:32 GMT.
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -41,10 +41,11 @@ function object(obj){
 				set:function(value){
 					var oldValue=eventHelper[key].currentValue;
 					eventHelper[key].currentValue=value;
-					for (var i=0,len=eventHelper[key].callback.length;i<len;i++){
-						eventHelper[key].callback[i].call(eventHelper[key].thisArg[i]||obj, value, oldValue,key, obj); 
+					if(value!==oldValue){
+						for (var i=0,len=eventHelper[key].callback.length;i<len;i++){
+							eventHelper[key].callback[i].call(eventHelper[key].thisArg[i]||obj, value, oldValue,key, obj); 
+						}
 					}
-					
 				},
 				get:function(){
 					return eventHelper[key].currentValue;
