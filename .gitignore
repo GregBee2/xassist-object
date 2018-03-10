@@ -2,3 +2,4 @@
 /**.stackdump
 package-lock.json
 *.stackdump
+node_modules

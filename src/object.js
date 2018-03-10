@@ -17,6 +17,26 @@ export default function(obj){
 		}
 		return value;
 	};
+	function onChange(key,fn,thisArg){
+		var currentValue;
+		if(!key || !obj.hasOwnProperty(key)){
+			throw new ReferenceError('key does not exist in Object');
+		}
+		if(!thisArg){
+			thisArg=obj;
+		}
+		currentValue=obj[key];
+		Object.defineProperty(obj,key,{
+			set:function(value){
+				var oldValue=currentValue;
+				currentValue=value;
+				fn.call(thisArg, value, currentValue,key, obj); 
+			},
+			get:function(){
+				return currentValue;
+			}
+		});
+	}
 	function assign(varArgs) { // .length of function is 2
 		if(typeof Object.assign === 'function'){
 			return Object.assign.apply(null,[obj].concat(Array.prototype.slice.call(arguments)));
