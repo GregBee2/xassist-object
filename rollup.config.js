@@ -1,4 +1,5 @@
 const definition = require("./package.json");
+const dependencies = Object.keys(definition.dependencies || {});
 var endOfLine = require('os').EOL;
 var bannerText="// "+(definition.homepage||definition.name)+" Version "+definition.version+"."+
 	endOfLine+"// Copyright "+(new Date).getFullYear()+" "+definition.author.name+"."+
@@ -29,6 +30,7 @@ export default {
 		extend: true,
 		file: definition.main,
 		format: _format,
+		globals: dependencies.reduce((p, v) => (p[v] = "xa", p), {}),
 		name:'xa',
 		banner:bannerText
 	}	

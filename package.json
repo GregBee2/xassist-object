@@ -35,7 +35,9 @@
     "rollup-plugin-node-resolve": "^3.0.3",
     "tape": "^4.9.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@xassist/xassist-eventdispatcher": "0.0.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GregBee2/xassist-object.git"

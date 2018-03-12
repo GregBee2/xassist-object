@@ -1,125 +1,124 @@
-
 'use strict'
+import {default as EventDispatcher} from "xassist-eventDispatcher";
+export defaultfunction (obj) {
+	return new XaObject(obj);
+}
+function XaObject(obj) {
+	this.object = obj;
+	EventDispatcher.call(this, this); //containerElm=modal
+	this.currentValues = {};
+}
+XaObject.prototype = Object.create(EventDispatcher.prototype); // Here's where the inheritance occurs
+XaObject.prototype.constructor = XaObject;
+function _getType(value) {
+	return typeof value;
+};
+function _transformType(type, value) {
+	if (type === "boolean") {
+		return !!value;
+	}
+	if (type === "number") {
+		return Number(value);
+	}
+	if (type === "string") {
+		return String(value);
+	}
+	return value;
+};
+XaObject.prototype.onChange = function (key, fn, thisArg) {
 
-export default function(obj){
-	var eventHelper={};
-	function _getType(value){
-		return typeof value;
-	};
-	function _transformType(type,value){
-		if(type==="boolean"){
-			return !!value;
-		}
-		if(type==="number"){
-			return Number(value);
-		}
-		if(type==="string"){
-			return String(value);
-		}
-		return value;
-	};
-	function onChange(key,fn,thisArg){
-		var currentValue, newWatch=false;;
-		if(!key || !obj.hasOwnProperty(key)){
-			throw new ReferenceError('key does not exist in Object');
-		}
-		if(!eventHelper.hasOwnProperty(key)){
-			eventHelper[key]={
-				currentValue:obj[key],
-				callback:[],
-				thisArg:[]
-			};
-			newWatch=true;
-		}
-		eventHelper[key].callback.push(fn);
-		eventHelper[key].thisArg.push(thisArg);
-		if (newWatch){
-			Object.defineProperty(obj,key,{
-				set:function(value){
-					var oldValue=eventHelper[key].currentValue;
-					eventHelper[key].currentValue=value;
-					if(value!==oldValue){
-						for (var i=0,len=eventHelper[key].callback.length;i<len;i++){
-							eventHelper[key].callback[i].call(eventHelper[key].thisArg[i]||obj, value, oldValue,key, obj); 
-						}
-					}
-				},
-				get:function(){
-					return eventHelper[key].currentValue;
+	var me = this,
+	newWatch = false;
+	if (!key || !this.object.hasOwnProperty(key)) {
+		throw new ReferenceError('key does not exist in Object');
+	}
+	if (!this.hasEvent("changeKey" + key)) {
+		this.registerEvent("changeKey" + key, this.object);
+		this.currentValues[key] = this.object[key];
+		newWatch = true;
+	}
+	EventDispatcher.prototype.on.call(this, "changeKey" + key, fn, thisArg);
+	if (newWatch) {
+		Object.defineProperty(this.object, key, {
+			set: function (value) {
+				var oldValue = me.currentValues[key];
+				me.currentValues[key] = value;
+				if (value !== oldValue) {
+					me.fire("changeKey" + key, value, oldValue, key, me.object);
 				}
-			})
-		}
-	};
-	function assign(varArgs) { // .length of function is 2
-		if(typeof Object.assign === 'function'){
-			return Object.assign.apply(null,[obj].concat(Array.prototype.slice.call(arguments)));
-		}
-		if (obj == null) { // TypeError if undefined or null
-			throw new TypeError('Cannot convert undefined or null to object');
-		}
-		var to = Object(obj);
-		for (var index = 0; index < arguments.length; index++) {
-			var nextSource = arguments[index];
-			if (nextSource != null) { // Skip over if undefined or null
-				for (var nextKey in nextSource) {
-					// Avoid bugs when hasOwnProperty is shadowed
-					if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-						to[nextKey] = nextSource[nextKey];
-					}
+			},
+			get: function () {
+				return me.currentValues[key];
+			}
+		})
+	}
+};
+XaObject.prototype.assign = function (varArgs) { // .length of function is 2
+	if (typeof Object.assign === 'function') {
+		return Object.assign.apply(null, [this.object].concat(Array.prototype.slice.call(arguments)));
+	}
+	if (this.object == null) { // TypeError if undefined or null
+		throw new TypeError('Cannot convert undefined or null to object');
+	}
+	var to = Object(this.object);
+	for (var index = 0; index < arguments.length; index++) {
+		var nextSource = arguments[index];
+		if (nextSource != null) { // Skip over if undefined or null
+			for (var nextKey in nextSource) {
+				// Avoid bugs when hasOwnProperty is shadowed
+				if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+					to[nextKey] = nextSource[nextKey];
 				}
 			}
 		}
-		return to;
 	}
-	function clone(){return JSON.parse(JSON.stringify( obj ));}
-	function mergeUnique(source){
-		//copies only existing key in obj from source to obj
-		//problems may arise with objects, dates, arrays, ... for now Strings, numbers, 
-		if (source != null) { // Skip over if undefined or null
-			Object.keys(obj).forEach(function(targetKey){
-				if(source.hasOwnProperty(targetKey)){
-					obj[targetKey] = _transformType(_getType(obj[targetKey]),source[targetKey]);
-				}
-			});
-		}
-		return obj;
-	}
-	function toArray(){
-		return Object.keys(obj).map(function(property_name){ 
-			return obj[property_name]; 
+	return to;
+}
+XaObject.prototype.clone = function () {
+	return JSON.parse(JSON.stringify(this.object));
+}
+XaObject.prototype.mergeUnique = function (source) {
+	var me = this;
+	//copies only existing key in obj from source to obj
+	//problems may arise with objects, dates, arrays, ... for now Strings, numbers,
+	if (source != null) { // Skip over if undefined or null
+		Object.keys(this.object).forEach(function (targetKey) {
+			if (source.hasOwnProperty(targetKey)) {
+				me.object[targetKey] = _transformType(_getType(me.object[targetKey]), source[targetKey]);
+			}
 		});
 	}
-	function toMapArray(){
-		return Object.keys(obj).map(function(property_name){ 
-			return [property_name,obj[property_name]]; 
-		});
+	return obj;
+}
+XaObject.prototype.toArray = function () {
+	var me = this;
+	return Object.keys(this.object).map(function (property_name) {
+		return me.object[property_name];
+	});
+}
+XaObject.prototype.toMapArray = function () {
+	var me = this;
+	return Object.keys(this.object).map(function (property_name) {
+		return [property_name, me.object[property_name]];
+	});
+}
+XaObject.prototype.forEach = function (fn, thisArg) {
+	var me = this;
+	if (!thisArg) {
+		thisArg = this.object;
 	}
-	function forEach(fn,thisArg){
-		if(!thisArg){
-			thisArg=obj;
-		}
-		return Object.keys(obj).forEach(function(property_name){ 
-			fn.call(thisArg, obj[property_name], property_name, obj); 
-		},thisArg);
+	return Object.keys(this.object).forEach(function (property_name) {
+		fn.call(thisArg, me.object[property_name], property_name, me.object);
+	}, thisArg);
+}
+XaObject.prototype.map = function (fn, thisArg) {
+	var me = this;
+	if (!thisArg) {
+		thisArg = this.object;
 	}
-	function map(fn,thisArg){
-		if(!thisArg){
-			thisArg=obj;
-		}
-		var newObject={};
-		Object.keys(obj).forEach(function(property_name){ 
-			newObject[property_name]=fn.call(thisArg, obj[property_name], property_name, obj); 
-		},thisArg);
-		return newObject;
-	}
-	return {
-		clone:clone,
-		mergeUnique:mergeUnique,
-		toArray:toArray,
-		toMapArray:toMapArray,
-		forEach:forEach,
-		map:map,
-		assign:assign,
-		onChange:onChange
-	}
+	var newObject = {};
+	Object.keys(this.object).forEach(function (property_name) {
+		newObject[property_name] = fn.call(thisArg, me.object[property_name], property_name, me.object);
+	}, thisArg);
+	return newObject;
 }
