@@ -25,6 +25,7 @@ console.log(dependencies.reduce((p, v) => (p[v] = "xa", p), {}));
 
 export default {
 	input: './index.js',
+	external: dependencies,
 	plugins:[],
 	output:{
 		extend: true,
