@@ -12,16 +12,28 @@ var t=object(testObject);
 tape("onChange(key,fn,thisArg) executes the function when the value for the key is set",function(test){
 	var res=false;
 	var fn=function(value,oldValue,key,Object){ res=Array.prototype.slice.call(arguments)};
+	var t2=object(testObject).clone();
+	var t1=object(t2);
 	//t.onChange("keyDoesNotExists",fn);
 	var err=false;
 	try{
-		t.onChange("keyDoesNotExists",fn);
+		t1.onChange("keyDoesNotExists",fn);
 		
 	}catch(error){
 		err=error;
 	}
 	test.ok(!!err&&err.constructor.name==="ReferenceError"&&err.message==='key does not exist in Object',
 		"onChange() gives an error when key does not exist"
+	);
+	t1.onChange("a",fn);
+	t2.a=1; //nochange
+	t2.b=157;
+	test.ok(res===false,
+		"does not fire when no changes are detected (oldValue = newValue) or when other values are changed"
+	);
+	t2.a=2; //change
+	test.deepEqual(res,[2,1,"a",t2],
+		"onchange fires when value changes"
 	);
 	test.end();
 });

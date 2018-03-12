@@ -1,6 +1,6 @@
 // https://github.com/GregBee2/xassist-object#readme Version 0.0.20.
 // Copyright 2018 undefined.
-// Created on Mon, 12 Mar 2018 12:10:38 GMT.
+// Created on Mon, 12 Mar 2018 12:23:25 GMT.
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@xassist/xassist-eventdispatcher')) :
 	typeof define === 'function' && define.amd ? define(['exports', '@xassist/xassist-eventdispatcher'], factory) :

@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">85.54% </span>
+        <span class="strong">98.8% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>71/83</span>
+        <span class='fraction'>82/83</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">78.57% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>28/42</span>
+        <span class='fraction'>33/42</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">90.48% </span>
+        <span class="strong">95.24% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>19/21</span>
+        <span class='fraction'>20/21</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">85.54% </span>
+        <span class="strong">98.8% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>71/83</span>
+        <span class='fraction'>82/83</span>
       </div>
     </div>
   </div>
@@ -190,12 +190,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">10×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">8×</span>
-<span class="cline-any cline-yes">8×</span>
-<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -214,24 +214,24 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -262,7 +262,7 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">5×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">2×</span>
@@ -317,7 +317,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// https://github.com/GregBee2/xassist-object#readme Version 0.0.20.
 // Copyright 2018 undefined.
-// Created on Mon, 12 Mar 2018 12:10:38 GMT.
+// Created on Mon, 12 Mar 2018 12:23:25 GMT.
 (function (global, factory) {
 	typeof exports === 'object' &amp;&amp; typeof module !== 'undefined' ? factory(exports, require('@xassist/xassist-eventdispatcher')) :
 <span class="branch-1 cbranch-no" title="branch not covered" >	typeof define === 'function' &amp;&amp; define.amd ? define(['exports', '@xassist/xassist-eventdispatcher'], factory) :</span>
@@ -352,22 +352,22 @@ function _getType(value) {
 &nbsp;
 	var me = this,
 	newWatch = false;
-	<span class="missing-if-branch" title="else path not taken" >E</span>if (!key || !this.object.hasOwnProperty(key)) {
+	if (!key || !this.object.hasOwnProperty(key)) {
 		throw new ReferenceError('key does not exist in Object');
 	}
-<span class="cstat-no" title="statement not covered" >	if (!this.hasEvent("changeKey" + key)) {</span>
-<span class="cstat-no" title="statement not covered" >		this.registerEvent("changeKey" + key, this.object);</span>
-<span class="cstat-no" title="statement not covered" >		this.currentValues[key] = this.object[key];</span>
-<span class="cstat-no" title="statement not covered" >		newWatch = true;</span>
+	<span class="missing-if-branch" title="else path not taken" >E</span>if (!this.hasEvent("changeKey" + key)) {
+		this.registerEvent("changeKey" + key, this.object);
+		this.currentValues[key] = this.object[key];
+		newWatch = true;
 	}
-<span class="cstat-no" title="statement not covered" >	xassistEventdispatcher.EventDispatcher.prototype.on.call(this, "changeKey" + key, fn, thisArg);</span>
-<span class="cstat-no" title="statement not covered" >	if (newWatch) {</span>
-<span class="cstat-no" title="statement not covered" >		Object.defineProperty(this.object, key, {</span>
-			set: <span class="fstat-no" title="function not covered" >function (value) {</span>
-<span class="cstat-no" title="statement not covered" >				var oldValue = me.currentValues[key];</span>
-<span class="cstat-no" title="statement not covered" >				me.currentValues[key] = value;</span>
-<span class="cstat-no" title="statement not covered" >				if (value !== oldValue) {</span>
-<span class="cstat-no" title="statement not covered" >					me.fire("changeKey" + key, value, oldValue, key, me.object);</span>
+	xassistEventdispatcher.EventDispatcher.prototype.on.call(this, "changeKey" + key, fn, thisArg);
+	<span class="missing-if-branch" title="else path not taken" >E</span>if (newWatch) {
+		Object.defineProperty(this.object, key, {
+			set: function (value) {
+				var oldValue = me.currentValues[key];
+				me.currentValues[key] = value;
+				if (value !== oldValue) {
+					me.fire("changeKey" + key, value, oldValue, key, me.object);
 				}
 			},
 			get: <span class="fstat-no" title="function not covered" >function () {</span>
@@ -457,7 +457,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Mar 12 2018 13:10:38 GMT+0100 (Romance Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Mar 12 2018 13:23:26 GMT+0100 (Romance Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>
