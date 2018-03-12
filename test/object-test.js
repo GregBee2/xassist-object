@@ -141,7 +141,7 @@ tape("mergeUnique(source) copies existing keys in targetobj from source", functi
 	test.ok(a==testObject,
 		"mergeUnique() doe snothing and return original object");
 	var a=object(testObject2).mergeUnique(sourceObj);
-	test.ok(isNaN(a.number3)); //deepEqual and NaN does not match!
+	test.ok(isNaN(a.number3),"isNaN is used when converting between real String and Number"); //deepEqual and NaN does not match!
 	delete a.number3;
 	delete expectedResult.number3;
 	test.deepEqual(a,expectedResult,
@@ -149,8 +149,8 @@ tape("mergeUnique(source) copies existing keys in targetobj from source", functi
 	test.end();
 })
 tape("assign() works the same ways as Object.assign", function(test) {
-	var t1=object(t).clone();
-	var t2=object(t).clone();
+	var t1=object(testObject).clone();
+	var t2=object(testObject).clone();
 	var objWithProto=function(){this.b=false};
 	objWithProto.prototype={falsePos:true}
 	var c=new objWithProto();
@@ -160,14 +160,13 @@ tape("assign() works the same ways as Object.assign", function(test) {
 	test.deepEqual(t1,t2,
 		"assign() when Object.assign is defined works"
 	);
-	t2=object(t).clone();
+	t2=object(testObject).clone();
 	Object.assign=false;
 	object(t2).assign(c,null,{e:4});
 	test.deepEqual(t1,t2,
 		"assign() without  Object.assign uses correct polyfill even with shadowed hasOwnProperty and enumerable prototype keys"
 	);
 	var err=false;
-	t2=object(t).clone();
 	try{
 		object().assign(null,{e:4});
 		

@@ -1,6 +1,7 @@
 'use strict'
-import {default as EventDispatcher} from "xassist-eventDispatcher";
-export defaultfunction (obj) {
+import  {EventDispatcher as  EventDispatcher} from "@xassist/xassist-eventdispatcher";
+console.log(EventDispatcher);
+export default function (obj) {
 	return new XaObject(obj);
 }
 function XaObject(obj) {
@@ -88,7 +89,7 @@ XaObject.prototype.mergeUnique = function (source) {
 			}
 		});
 	}
-	return obj;
+	return this.object;
 }
 XaObject.prototype.toArray = function () {
 	var me = this;

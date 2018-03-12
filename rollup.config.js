@@ -6,7 +6,7 @@ var bannerText="// "+(definition.homepage||definition.name)+" Version "+definiti
 	endOfLine+"// Created on "+(new Date).toUTCString()+".";
 //var ignoreUMD=endOfLine+endOfLine+"/*istanbul ignore next*/"; //ignore umd definition
 var _format="umd";
-import resolve from "rollup-plugin-node-resolve";
+
 var args=process.argv
 var formatArgs=["-f","--output.format"];
 console.log(args)
@@ -21,11 +21,11 @@ for (let i=0,len=args.length;i<len;i++){
 		}
 	}
 }
-console.log(_format);
+console.log(dependencies.reduce((p, v) => (p[v] = "xa", p), {}));
 
 export default {
 	input: './index.js',
-	plugins:[resolve({browser:true})],
+	plugins:[],
 	output:{
 		extend: true,
 		file: definition.main,
