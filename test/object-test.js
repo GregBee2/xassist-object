@@ -10,8 +10,9 @@ var testObject={
 var t=object(testObject);
 
 tape("onChange(key,fn,thisArg) executes the function when the value for the key is set",function(test){
-	var res=false;
-	var fn=function(value,oldValue,key,Object){ res=Array.prototype.slice.call(arguments)};
+	var res=false,res2=false;
+	var fn=function(value,oldValue,key,Object){ res=(Array.prototype.slice.call(arguments))};
+	var fn2=function(value,oldValue,key,Object){ res2=(res[0]==value)};
 	var t2=object(testObject).clone();
 	var t1=object(t2);
 	//t.onChange("keyDoesNotExists",fn);
@@ -32,8 +33,14 @@ tape("onChange(key,fn,thisArg) executes the function when the value for the key 
 		"does not fire when no changes are detected (oldValue = newValue) or when other values are changed"
 	);
 	t2.a=2; //change
-	test.deepEqual(res,[2,1,"a",t2],
+	test.deepEqual([res,res2],[[2,1,"a",t2],false],
 		"onchange fires when value changes"
+	);
+	t1.onChange("a",fn2);
+	t2.a=3;
+	console.log(res2,res)
+	test.ok(t2.a===3&&res2===true,
+		"after Onchange value gets set to correct value, multiple onchange's get executed in correct order"
 	);
 	test.end();
 });
