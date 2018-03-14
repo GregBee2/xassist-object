@@ -7,7 +7,7 @@
 	(factory((global.xa = global.xa || {}),global.xa));
 }(this, (function (exports,xassistEventdispatcher) { 'use strict';
 
-console.log(xassistEventdispatcher.EventDispatcher);
+
 function object (obj) {
 	return new XaObject(obj);
 }

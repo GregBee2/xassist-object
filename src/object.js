@@ -1,6 +1,6 @@
 'use strict'
 import  {EventDispatcher as  EventDispatcher} from "@xassist/xassist-eventdispatcher";
-console.log(EventDispatcher);
+
 export default function (obj) {
 	return new XaObject(obj);
 }
