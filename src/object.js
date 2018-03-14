@@ -13,7 +13,7 @@ XaObject.prototype = Object.create(EventDispatcher.prototype); // Here's where t
 XaObject.prototype.constructor = XaObject;
 function _getType(value) {
 	return typeof value;
-};
+}
 function _transformType(type, value) {
 	if (type === "boolean") {
 		return !!value;
@@ -25,7 +25,7 @@ function _transformType(type, value) {
 		return String(value);
 	}
 	return value;
-};
+}
 XaObject.prototype.onChange = function (key, fn, thisArg) {
 
 	var me = this,
@@ -54,7 +54,7 @@ XaObject.prototype.onChange = function (key, fn, thisArg) {
 		})
 	}
 };
-XaObject.prototype.assign = function (varArgs) { // .length of function is 2
+XaObject.prototype.assign = function (/*varArgs*/) { // .length of function is 2
 	if (typeof Object.assign === 'function') {
 		return Object.assign.apply(null, [this.object].concat(Array.prototype.slice.call(arguments)));
 	}

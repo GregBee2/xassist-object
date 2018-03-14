@@ -1,12 +1,14 @@
-// https://github.com/GregBee2/xassist-object#readme Version 0.1.1.
-// Copyright 2018 undefined.
-// Created on Mon, 12 Mar 2018 12:41:15 GMT.
+/**
+* @preserve
+* https://github.com/GregBee2/xassist-object#readme Version 0.1.2.
+*  Copyright 2018 Gregory Beirens.
+*  Created on Wed, 14 Mar 2018 11:49:41 GMT.
+*/
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@xassist/xassist-eventdispatcher')) :
 	typeof define === 'function' && define.amd ? define(['exports', '@xassist/xassist-eventdispatcher'], factory) :
 	(factory((global.xa = global.xa || {}),global.xa));
 }(this, (function (exports,xassistEventdispatcher) { 'use strict';
-
 
 function object (obj) {
 	return new XaObject(obj);
@@ -20,7 +22,8 @@ XaObject.prototype = Object.create(xassistEventdispatcher.EventDispatcher.protot
 XaObject.prototype.constructor = XaObject;
 function _getType(value) {
 	return typeof value;
-}function _transformType(type, value) {
+}
+function _transformType(type, value) {
 	if (type === "boolean") {
 		return !!value;
 	}
@@ -31,7 +34,8 @@ function _getType(value) {
 		return String(value);
 	}
 	return value;
-}XaObject.prototype.onChange = function (key, fn, thisArg) {
+}
+XaObject.prototype.onChange = function (key, fn, thisArg) {
 
 	var me = this,
 	newWatch = false;
@@ -59,7 +63,7 @@ function _getType(value) {
 		});
 	}
 };
-XaObject.prototype.assign = function (varArgs) { // .length of function is 2
+XaObject.prototype.assign = function (/*varArgs*/) { // .length of function is 2
 	if (typeof Object.assign === 'function') {
 		return Object.assign.apply(null, [this.object].concat(Array.prototype.slice.call(arguments)));
 	}
