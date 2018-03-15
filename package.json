@@ -1,6 +1,6 @@
 {
   "name": "@xassist/xassist-object",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "general helper functions for JavaScript objects ",
   "keywords": [
     "xAssist",
@@ -20,7 +20,7 @@
     "email": "gregory.beirens@gmail.com"
   },
   "main": "dist/xAssist-object.js",
-  "module":"index",
+  "module": "index",
   "scripts": {
     "pretest": "rimraf dist  && rollup -c",
     "test": "istanbul cover node_modules/tape/bin/tape test/**/*-test.js && eslint index.js src",
