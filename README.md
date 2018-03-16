@@ -15,61 +15,101 @@ command line tools.
 npm install @xassist/xassist-object --save
 ```
 
+## Usage
+
+### object()
+
+The base function object() creates a new `Class` instance which gives access to some helper Object-functions
+```js
+object(/*obj:Object*/)
+```
+
+note that the `new`- keyword should not be used to create the class-instance.
+
+#### parameters for object() 
+`object()` takes one (non-optional) parameters:
+- **obj**: an Object on which we will execute the underlying methods.
+
+example usage:
+```js
+object({a:157})
+object({hello:"world", ok:true})
+```
+
+#### result for object()
+`object()` returns following methods:
+- `onChange` [function]: adds a listener to the current object for changes in values
+- `assign()` [function]: a polyfill for `Object.assign`
+- `clone()` [function]: very basic cloner for simple objects
+- `mergeUnique()` [function]: changes keys for this.object with given values, kinda similar to assign
+- `toArray()` [function]: returns all values for all keys in this.object
+- `toMapArray()` [function]: returns all `key,value`-pairs in this.object
+- `forEach()` [function]: similar to forEach for Arrays, but iterates over the keys of an object
+- `map()` [function]: similar to map for Arrays, but iterates over the keys of an object
+- `map()` [function]: similar to map for Arrays, but iterates over the keys of an object
+
+the classInstance name is XaObject and is a child-class of EventDispatcher.
+It's own attributes are:
+- `object` [Object]: the current object, provided via the simple factory-function `object()`
+- `currentvalues` [Object]: an intermediate object with the currentvalues of the base object, used for events
+
+### object().onChange()
+
+The first method `object().onChange()` sets a listener that will be executed if a value for a given key gets changed
+
+```js
+object(obj).onChange(keyName, callBack::function [thisArg])
+```
+
+This method accepts 3 parameters. the last one `thisArg` is optional, and defaults to the object (not the classInstance).
+
+#### parameters for object().onChange()
+
+the method `onChange(keyName,callback,thisArg)` accepts 3 parameters.
+- **keyName** [String] is an existing key for which the listener should gets executed, if the key does not exists, an Error is thrown
+- **callback** [Function]: a listnerfunction which takes 4 parameter
+	- the new value assigned to the object key
+	- the old value
+	- the keyName
+	- the object
+- **thisArg** [optional]:the execution-context of the listener
+
+**** example for object().onChange()
+
+Suppose following initialization:
+```js
+var b={yes:true}, res=false;
+fn=function(value,oldValue,key,Object){ res=(Array.prototype.slice.call(arguments))};
+var bObj=object(b);
+```
+
+Let's try to add a listener to a change on the key yes for the object b
+```js
+bObj.onChange("yes",fn)						
+b.yes=true //nothing get's changed so the listener is not fired
+b.yes="finally" //onChange is fired
+```
+the result being
+```js
+res===["finally",true,"yes",b]
+```
+
+
 ## Tests
 
 ```sh
 npm install
 npm test
 ```
-```
-
-> istanbul cover node_modules/tape/bin/tape test/**/*-test.js
-TAP version 13
-# toArray() returns array with all objectKey-Values
-ok 1 toArray() returns an array with all values for each enumerable key
-# MapArray() returns array with as elements each [objectKey,objectValue]
-ok 2 toArray() returns an array with all values for each enumerable key
-# forEach() executes function for each key value pair
-ok 3 forEach(fn) executes function with default this corresponding to original object
-ok 4 forEach(fn,thisArg) set correct execution context to thisArg
-# map() maps key,value pairs to new object
-ok 5 map(fn) returns new object with the correct keys, and calulated values
-ok 6 map(fn,thisArg) set correct execution context to thisArg
-# clone() returns object clone
-ok 7 clone() returns object clone
-ok 8 clone() is new object
-# mergeUnique(source) copies existing keys in targetobj from source
-ok 9 mergeUnique() doe snothing and return original object
-ok 10 should be truthy
-ok 11 mergeUnique(source) changes existing keys in target based upon sourceKeys
-# assign() works the same ways as Object.assign
-ok 12 assign() when Object.assign is defined works
-ok 13 assign() without Object.assign uses correct polyfill even with shadowed hasOwnProperty and enumerable prototype keys
-ok 14 assign() gives an error when source-object is null or undefined
-=============================== Coverage summary ===============================
-Statements   : 100% ( 55/55 )
-Branches     : 78.13% ( 25/32 )
-Functions    : 100% ( 17/17 )
-Lines        : 100% ( 54/54 )
-================================================================================
-1..14
-# tests 14
-# pass  14
-# ok
-
-```
 
 ## Dependencies
 
-None
+- [@xassist/xassist-eventdispatcher](https://ghub.io/@xassist/xassist-eventdispatcher):  general eventdispatcher class
 
 ## Dev Dependencies
 
-- [jsdom](https://ghub.io/jsdom): A JavaScript implementation of many web standards
 - [rimraf](https://ghub.io/rimraf): A deep deletion module for node (like `rm -rf`)
 - [rollup](https://ghub.io/rollup): Next-generation ES6 module bundler
-- [rollup-plugin-json](https://ghub.io/rollup-plugin-json): Convert .json files to ES6 modules:
-- [rollup-plugin-node-resolve](https://ghub.io/rollup-plugin-node-resolve): Bundle third-party dependencies in node_modules
 - [tape](https://ghub.io/tape): tap-producing test harness for node and browsers
 
 ## License
