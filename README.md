@@ -326,11 +326,6 @@ console.log(result)
 ```
 
 
-
-npm install
-npm test
-```
-
 ## Dependencies
 
 - [@xassist/xassist-eventdispatcher](https://ghub.io/@xassist/xassist-eventdispatcher):  general eventdispatcher class
