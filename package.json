@@ -29,7 +29,7 @@
     "prepublishOnly": "npm version patch && npm run build  -- \"publish latest version\"",
     "postpublish": "git push && git push --tags",
 	"readme":"node csv2readme.config.js",
-	"postreadme":"git commit -am "changed readme",
+	"postreadme":"git commit -am \"changed readme\"",
     "uglify": "uglifyjs  --comments /^@preserve/ dist/xAssist-object.js -c -m -o dist/xAssist-object.min.js"
   },
   "devDependencies": {
