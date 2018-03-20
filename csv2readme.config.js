@@ -4,8 +4,8 @@ const definition = require("./package.json");
 var options={
 	input:{
 		base:"../../helpData/csv/base.csv",
-		functionParam:"../../helpData/csv/functionParams.csv",
-		classDef:"../../helpData/csv/classes.csv"
+		functionParam:"../../helpData/csv/functionParameters.csv",
+		classDef:"../../helpData/csv/classDefinition.csv"
 	},
 	moduleName:"xassist-object",
 	globalTOC:false,
