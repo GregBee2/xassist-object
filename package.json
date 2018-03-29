@@ -28,17 +28,17 @@
     "build": "npm run test && git commit -am ",
     "prepublishOnly": "npm version patch && npm run build  -- \"publish latest version\"",
     "postpublish": "git push && git push --tags",
-	"readme":"node csv2readme.config.js",
+    "readme": "node csv2readme.config.js",
     "uglify": "uglifyjs  --comments /^@preserve/ dist/xAssist-object.js -c -m -o dist/xAssist-object.min.js"
   },
   "devDependencies": {
-    "csv2readme": "^1.0.1",
+    "csv2readme": "^1.1.1",
     "rimraf": "^2.6.2",
-    "rollup": "^0.56.5",
+    "rollup": "^0.57.1",
     "tape": "^4.9.0"
   },
   "dependencies": {
-    "@xassist/xassist-eventdispatcher": "0.0.12"
+    "@xassist/xassist-eventdispatcher": "1.0.1"
   },
   "repository": {
     "type": "git",
