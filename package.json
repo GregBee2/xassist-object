@@ -38,7 +38,7 @@
     "tape": "^4.9.0"
   },
   "dependencies": {
-    "@xassist/xassist-eventdispatcher": "1.0.1"
+    "@xassist/xassist-eventdispatcher": "^1.0.2"
   },
   "repository": {
     "type": "git",
